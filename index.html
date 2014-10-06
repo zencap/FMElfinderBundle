@@ -1,0 +1,504 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>ElFinderBundle for Symfony2 by helios-ag</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>ElFinderBundle for Symfony2</h1>
+        <p>ElFinderBundle provides ElFinder integration with TinyMCE and CKEditor</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/helios-ag/FMElfinderBundle" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/helios-ag/FMElfinderBundle/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/helios-ag/FMElfinderBundle/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="fmelfinderbundle" class="anchor" href="#fmelfinderbundle"><span class="octicon octicon-link"></span></a>FMElfinderBundle</h1>
+
+<p><a href="https://github.com/Studio-42/elFinder">ElFinder</a> integration in Symfony2</p>
+
+<p><a href="http://travis-ci.org/helios-ag/FMElfinderBundle"><img src="https://secure.travis-ci.org/helios-ag/FMElfinderBundle.png" alt="Build Status"></a>
+<a href="https://insight.sensiolabs.com/projects/604032ab-06ef-4ee2-b0cf-bb5240b9cd17"><img src="https://insight.sensiolabs.com/projects/604032ab-06ef-4ee2-b0cf-bb5240b9cd17/mini.png" alt="SensioLabsInsight"></a>
+<a href="https://bitdeli.com/free" title="Bitdeli Badge"><img src="https://d2weczhvl823v0.cloudfront.net/helios-ag/fmelfinderbundle/trend.png" alt="Bitdeli Badge"></a>
+<a href="https://www.versioneye.com/user/projects/53db56ab4b3ac87d6a0001ff"><img src="https://www.versioneye.com/user/projects/53db56ab4b3ac87d6a0001ff/badge.svg?style=flat" alt="Dependency Status"></a></p>
+
+<p><a href="https://packagist.org/packages/helios-ag/fm-elfinder-bundle"><img src="https://poser.pugx.org/helios-ag/fm-elfinder-bundle/v/stable.svg" alt="Latest Stable Version"></a> <a href="https://packagist.org/packages/helios-ag/fm-elfinder-bundle"><img src="https://poser.pugx.org/helios-ag/fm-elfinder-bundle/downloads.svg" alt="Total Downloads"></a> <a href="https://packagist.org/packages/helios-ag/fm-elfinder-bundle"><img src="https://poser.pugx.org/helios-ag/fm-elfinder-bundle/v/unstable.svg" alt="Latest Unstable Version"></a> <a href="https://packagist.org/packages/helios-ag/fm-elfinder-bundle"><img src="https://poser.pugx.org/helios-ag/fm-elfinder-bundle/license.svg" alt="License"></a></p>
+
+<p>elFinder is an open-source file manager for web, written in JavaScript using jQuery UI.
+Creation is inspired by simplicity and convenience of Finder program used in Mac OS X operating system.</p>
+
+<p>Recommended bundles to use with:</p>
+
+<p><a href="https://github.com/stfalcon/TinymceBundle/">TinymceBundle</a></p>
+
+<p><a href="https://github.com/egeloen/IvoryCKEditorBundle/">IvoryCKEditorBundle</a></p>
+
+<p><a href="https://github.com/trsteel88/TrsteelCkeditorBundle">TrsteelCkeditorBundle</a></p>
+
+<ul>
+<li>
+<a href="#installation">Installation</a>
+
+<ul>
+<li><a href="#step-1-installation">Step 1: Installation</a></li>
+<li><a href="#step-2-enable-the-bundle">Step 2: Enable the bundle</a></li>
+<li><a href="#step-3-import-fmelfinderbundle-routing-file">Step 3: Import FMElfinderBundle routing file</a></li>
+<li><a href="#step-4-configure-your-applications-securityyml">Step 4: Configure your application's security.yml</a></li>
+<li><a href="#step-5-configure-assetic">Step 5: Configure assetic</a></li>
+<li><a href="#step-6-install-and-dump-assets">Step 6: Install and dump assets</a></li>
+</ul>
+</li>
+<li>
+<a href="#basic-configuration">Basic configuration</a>
+
+<ul>
+<li><a href="#add-configuration-options-to-your-configyml">Add configuration options to your config.yml</a></li>
+</ul>
+</li>
+<li><a href="#configuring-symfony-service-as-a-volumedriver">Configuring symfony service as a volumeDriver</a></li>
+<li><a href="#elfinder-form-type">ElFinder form type</a></li>
+<li>
+<a href="#using-elfinder-with-ckeditorbundle">Using ElFinder with CKEditorBundle</a>
+
+<ul>
+<li><a href="#step-1-installation-1">Step 1: Installation:</a></li>
+<li><a href="#step-2-configure-ckeditor-setting-via-settingsyml-or-through-form-builder">Step 2: Configure CKEditor setting via settings.yml or through form builder:</a></li>
+</ul>
+</li>
+<li>
+<a href="#using-elfinder-with-tinymce">Using ElFinder with TinyMCE</a>
+
+<ul>
+<li><a href="#using-elfinderbundle-with-tinymcebundle">Using ElfinderBundle with TinyMCEBundle</a></li>
+<li><a href="#integrating-with-tinymce-4x">Integrating with TinyMCE 4.x</a></li>
+</ul>
+</li>
+<li><a href="#custom-configuration-provider">Custom configuration provider</a></li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>To install this bundle, you'll need both the lib <a href="https://github.com/helios-ag/ElFinderPHP">ElFinderPHP</a>
+and this bundle.</p>
+
+<p>This instruction explain how to setup bundle on Symfony 2.1 and newer</p>
+
+<h3>
+<a name="step-1-installation" class="anchor" href="#step-1-installation"><span class="octicon octicon-link"></span></a>Step 1: Installation</h3>
+
+<p>You have a choice to install bundle of version 1.x (1.x branch, <a href="https://github.com/helios-ag/FMElfinderBundle/blob/1.0/README.md">documentation</a>) or 2.x branch
+Add FMElfinderBundle in your composer.json:</p>
+
+<div class="highlight highlight-js"><pre><span class="p">{</span>
+    <span class="s2">"require"</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">"helios-ag/fm-elfinder-bundle"</span><span class="o">:</span> <span class="s2">"2.x"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Now tell composer to download the bundle by running the command:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>php composer.phar update helios-ag/fm-elfinder-bundle
+</pre></div>
+
+<h3>
+<a name="step-2-enable-the-bundle" class="anchor" href="#step-2-enable-the-bundle"><span class="octicon octicon-link"></span></a>Step 2: Enable the bundle</h3>
+
+<p>Enable the bundle in the kernel:</p>
+
+<div class="highlight highlight-php"><pre><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="c1">// app/AppKernel.php</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">registerBundles</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$bundles</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="c1">// ...</span>
+        <span class="k">new</span> <span class="nx">FM\ElfinderBundle\FMElfinderBundle</span><span class="p">(),</span>
+    <span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3>
+<a name="step-3-import-fmelfinderbundle-routing-file" class="anchor" href="#step-3-import-fmelfinderbundle-routing-file"><span class="octicon octicon-link"></span></a>Step 3: Import FMElfinderBundle routing file</h3>
+
+<div class="highlight highlight-yaml"><pre><span class="c1"># app/config/routing.yml</span>
+<span class="l-Scalar-Plain">elfinder</span><span class="p-Indicator">:</span>
+     <span class="l-Scalar-Plain">resource</span><span class="p-Indicator">:</span> <span class="s">"@FMElfinderBundle/Resources/config/routing.yml"</span>
+</pre></div>
+
+<h3>
+<a name="step-4-configure-your-applications-securityyml" class="anchor" href="#step-4-configure-your-applications-securityyml"><span class="octicon octicon-link"></span></a>Step 4: Configure your application's security.yml</h3>
+
+<p>Secure ElFinder with access_control:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="c1"># app/config/security.yml</span>
+<span class="l-Scalar-Plain">security</span><span class="p-Indicator">:</span>
+
+    <span class="l-Scalar-Plain">//....</span>
+    <span class="l-Scalar-Plain">access_control</span><span class="p-Indicator">:</span>
+        <span class="p-Indicator">-</span> <span class="p-Indicator">{</span> <span class="nv">path</span><span class="p-Indicator">:</span> <span class="nv">^/efconnect</span><span class="p-Indicator">,</span> <span class="nv">role</span><span class="p-Indicator">:</span> <span class="nv">ROLE_USER</span> <span class="p-Indicator">}</span>
+        <span class="p-Indicator">-</span> <span class="p-Indicator">{</span> <span class="nv">path</span><span class="p-Indicator">:</span> <span class="nv">^/elfinder</span><span class="p-Indicator">,</span> <span class="nv">role</span><span class="p-Indicator">:</span> <span class="nv">ROLE_USER</span> <span class="p-Indicator">}</span>
+
+</pre></div>
+
+<p>role ROLE_USER is provided as example.</p>
+
+<h3>
+<a name="step-5-configure-assetic" class="anchor" href="#step-5-configure-assetic"><span class="octicon octicon-link"></span></a>Step 5: Configure assetic</h3>
+
+<p>Under assetic section of your config.yml, add FMElfinderBundle to bundles section, also you can enable uglify js/css
+compressor (also you need to enable option "compression: true" under bundle configuration).</p>
+
+<p>Also set "use_controller: false".</p>
+
+<div class="highlight highlight-yaml"><pre><span class="l-Scalar-Plain">assetic</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">debug</span><span class="p-Indicator">:</span>          <span class="err">%</span><span class="l-Scalar-Plain">kernel.debug%</span>
+    <span class="l-Scalar-Plain">use_controller</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">false</span>
+    <span class="l-Scalar-Plain">bundles</span><span class="p-Indicator">:</span>        <span class="p-Indicator">[</span><span class="nv">FMElfinderBundle</span><span class="p-Indicator">]</span>
+    <span class="l-Scalar-Plain">java</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/usr/bin/java</span>
+    <span class="l-Scalar-Plain">filters</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">cssrewrite</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">~</span>
+        <span class="l-Scalar-Plain">uglifyjs2</span><span class="p-Indicator">:</span>
+            <span class="c1"># the path to the uglifyjs executable</span>
+            <span class="l-Scalar-Plain">bin</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/usr/bin/uglifyjs</span>
+        <span class="l-Scalar-Plain">uglifycss</span><span class="p-Indicator">:</span>
+            <span class="l-Scalar-Plain">bin</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">/usr/bin/uglifycss</span>
+</pre></div>
+
+<h3>
+<a name="step-6-install-and-dump-assets" class="anchor" href="#step-6-install-and-dump-assets"><span class="octicon octicon-link"></span></a>Step 6: Install and dump assets</h3>
+
+<p>Install and dump assets using symfony built-in commands:</p>
+
+<div class="highlight highlight-sh"><pre>app/console assets:install web
+app/console assetic:dump --env<span class="o">=</span>prod
+</pre></div>
+
+<h2>
+<a name="basic-configuration" class="anchor" href="#basic-configuration"><span class="octicon octicon-link"></span></a>Basic configuration</h2>
+
+<h3>
+<a name="add-configuration-options-to-your-configyml" class="anchor" href="#add-configuration-options-to-your-configyml"><span class="octicon octicon-link"></span></a>Add configuration options to your config.yml</h3>
+
+<pre><code>fm_elfinder:
+    instances:
+        default:
+            locale: %locale% # defaults to current request locale
+            editor: ckeditor # other choices are tinymce or simple, and form
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        showhidden: false # defaults to false
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+</code></pre>
+
+<ul>
+<li>default - instance of elfinder, can be used to define multiple configurations of ElFinder, allows simultaneous configuration for different types of WYSIWYG editors in your project</li>
+<li>path - define root directory for the files inside web/ directory, default is "uploads". Make sure to set proper write/read permissions to this directory.</li>
+<li>url - url to be prefixed to image path, for displaying. Can be either absolute or relative. If relative, it will be prefixed with the applications base-url. If left blank, url will be the base-url, appened with the value of the 'path' parameter</li>
+<li>driver - can be LocalFileSystem, FTP or MySQL2, currently supported only LocalFileSystem, default is LocalFileSystem</li>
+<li>locale - locale determines, which language, ElFinder will use, to translate user interface, default is current request locale</li>
+<li>editor - determines what template to render, to be compatible with WYSIWYG web editor, currently supported options are:
+"ckeditor", "tinymce" and "simple". How to configure CKEDitor and TinyMCE to work with this bundle, will be explained further in this document.
+"simple" can be used as standalone filebrowser for managing and uploading files.</li>
+<li>showhidden - hides directories starting with . (dot)</li>
+<li>connector - root node for defining options for elfinder root directiories and debug option</li>
+<li>roots - define</li>
+</ul><h2>
+<a name="configuring-symfony-service-as-a-volumedriver" class="anchor" href="#configuring-symfony-service-as-a-volumedriver"><span class="octicon octicon-link"></span></a>Configuring symfony service as a volumeDriver</h2>
+
+<p>volumeDriver can be declared as Symfony service
+The service should however be an instance of the FM\ElFinderPHP\Driver\ElFinderVolumeDriver class. This check is to
+ensure the service is a valid ElFinder VolumeDriver.</p>
+
+<p>To configure a root with a service-driver you can simply use the service id as the drive key:</p>
+
+<pre><code>fm_elfinder:
+    connector:
+        roots:
+            uploads:
+                driver: elfinder.driver.filesystem
+                path: uploads
+</code></pre>
+
+<p>This means that if you add the service definition:</p>
+
+<div class="highlight highlight-xml"><pre><span class="nt">&lt;service</span> <span class="na">id=</span><span class="s">"elfinder.driver.filesystem"</span> <span class="na">class=</span><span class="s">"FM\ElFinderPHP\Driver\ElFinderVolumeLocalFileSystem"</span> <span class="nt">/&gt;</span>
+</pre></div>
+
+<h2>
+<a name="elfinder-form-type" class="anchor" href="#elfinder-form-type"><span class="octicon octicon-link"></span></a>Elfinder Form Type</h2>
+
+<p>Since version 2.1 of the bundle, bundle come with custom form type, that is simple  , that provide
+elfinder callback (opens Elfinder window), configuration for this form type is simple
+First, define instance with editor setted to "form":</p>
+
+<pre><code>fm_elfinder:
+    instances:
+        form:
+            locale: %locale% # defaults to current request locale
+            editor: form # other choices are tinymce or simple, and form
+            showhidden: false # defaults to false
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            compression: false # enable if you configured the uglifycss and uglifyjs2 assetic filters and want compression
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 2M
+</code></pre>
+
+<p>On second step, add to your form builder (or form class), elfinder type, and pass instance and enable parameters:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFormBuilder</span><span class="p">()</span>
+    <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">'elfinder'</span><span class="p">,</span><span class="s1">'elfinder'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'instance'</span><span class="o">=&gt;</span><span class="s1">'form'</span><span class="p">,</span> <span class="s1">'enable'</span><span class="o">=&gt;</span><span class="k">true</span><span class="p">))</span>
+    <span class="o">-&gt;</span><span class="na">getForm</span><span class="p">();</span>
+</pre></div>
+
+<p>Render form with twig as usual:</p>
+
+<div class="highlight highlight-jinja"><pre><span class="x">&lt;form action="" method="post" </span><span class="cp">{{</span> <span class="nv">form_enctype</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&gt;</span>
+<span class="x">        </span><span class="cp">{{</span> <span class="nv">form_widget</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">        &lt;input type="submit" /&gt;</span>
+<span class="x">    &lt;/form&gt;</span>
+</pre></div>
+
+<h2>
+<a name="using-elfinder-with-ckeditorbundle" class="anchor" href="#using-elfinder-with-ckeditorbundle"><span class="octicon octicon-link"></span></a>Using ElFinder with <a href="https://github.com/trsteel88/TrsteelCkeditorBundle">CKEditorBundle</a>
+</h2>
+
+<p>Mostly filebrowsers used with WYSIWYG editors to upload images and other files. The example above will show how to
+configure <a href="https://github.com/trsteel88/TrsteelCkeditorBundle">CKEditorBundle</a> by Trsteel to work with ElFinder
+through <a href="https://github.com/helios-ag/FMElFinderBundle">FMElFinderBundle</a>
+Also take a view to <a href="https://github.com/egeloen" class="user-mention">@egeloen</a> <a href="https://github.com/egeloen/IvoryCKEditorBundle">IvoryCKEditorBundle</a>, which includes
+<a href="https://github.com/egeloen/IvoryCKEditorBundle/blob/master/Resources/doc/file_browse_upload.md">configuration guide</a> for both bundles</p>
+
+<h3>
+<a name="step-1-installation-1" class="anchor" href="#step-1-installation-1"><span class="octicon octicon-link"></span></a>Step 1: Installation:</h3>
+
+<p>Install both bundles according README files</p>
+
+<h3>
+<a name="step-2-configure-ckeditor-setting-via-settingsyml-or-through-form-builder" class="anchor" href="#step-2-configure-ckeditor-setting-via-settingsyml-or-through-form-builder"><span class="octicon octicon-link"></span></a>Step 2: Configure CKEditor setting via settings.yml or through form builder:</h3>
+
+<div class="highlight highlight-yml"><pre><span class="l-Scalar-Plain">trsteel_ckeditor</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">...</span>
+    <span class="l-Scalar-Plain">filebrowser_image_browse_url</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">route</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">elfinder</span>
+        <span class="l-Scalar-Plain">route_parameters</span><span class="p-Indicator">:</span>
+             <span class="l-Scalar-Plain">instance</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ckeditor</span>
+</pre></div>
+
+<p>or if you prefer Ivory CKEditor Bundle</p>
+
+<div class="highlight highlight-yml"><pre><span class="l-Scalar-Plain">ivory_ck_editor</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">default_config</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">default</span>
+    <span class="l-Scalar-Plain">configs</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">default</span><span class="p-Indicator">:</span>
+            <span class="l-Scalar-Plain">filebrowserBrowseRoute</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">elfinder</span>
+            <span class="l-Scalar-Plain">filebrowserBrowseRouteParameters</span><span class="p-Indicator">:</span>
+                <span class="l-Scalar-Plain">instance</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">ckeditor</span>
+
+</pre></div>
+
+<p>Note that instance name should be the same as configured in elfinder bundle</p>
+
+<div class="highlight highlight-php"><pre>
+<span class="o">&lt;?</span><span class="nx">php</span>
+
+<span class="nv">$form</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">createFormBuilder</span><span class="p">()</span>
+            <span class="o">-&gt;</span><span class="na">add</span><span class="p">(</span><span class="s1">'content'</span><span class="p">,</span> <span class="s1">'ckeditor'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s1">'filebrowser_image_browse_url'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                    <span class="s1">'route'</span>            <span class="o">=&gt;</span> <span class="s1">'elfinder'</span><span class="p">,</span>
+                    <span class="s1">'route_parameters'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'instance'</span> <span class="o">=&gt;</span> <span class="s1">'ckeditor'</span><span class="p">),</span>
+                <span class="p">),</span>
+            <span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">getForm</span><span class="p">()</span>
+<span class="p">;</span>
+</pre></div>
+
+<p>ElFinder will be available under Insert Image dialog</p>
+
+<h2>
+<a name="using-elfinder-with-tinymce" class="anchor" href="#using-elfinder-with-tinymce"><span class="octicon octicon-link"></span></a>Using ElFinder with TinyMCE</h2>
+
+<p>You can integrate TinyMCE byself or use Bundles that already add TinyMCE functionality to your Symfony project.
+Below instruction how to integrate <a href="https://github.com/helios-ag/FMElfinderBundle">FMElfinderBundle</a> with <a href="https://github.com/stfalcon/TinymceBundle">TinyMCEBundle</a></p>
+
+<h3>
+<a name="using-elfinderbundle-with-tinymcebundle" class="anchor" href="#using-elfinderbundle-with-tinymcebundle"><span class="octicon octicon-link"></span></a>Using ElfinderBundle with <a href="https://github.com/stfalcon/TinymceBundle">TinyMCEBundle</a>
+</h3>
+
+<p>Instruction for bundle version 0.2.1 (TinyMCE 3.x), instruction for TinyMCE 4.x, you can find at the end of this
+document.
+Download both bundles, configure, dump and install assets as written in installation steps</p>
+
+<h3>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h3>
+
+<p>Update the editor property in your app/config.yml
+Set TinyMce popup path:</p>
+
+<div class="highlight highlight-yml"><pre><span class="l-Scalar-Plain">fm_elfinder</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">editor</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tinymce</span>
+    <span class="l-Scalar-Plain">tinymce_popup_path</span><span class="p-Indicator">:</span> <span class="s">"asset[bundles/stfalcontinymce/vendor/tiny_mce/tiny_mce_popup.js]"</span>
+</pre></div>
+
+<p>Under tinymce configuration node, theme configuration, add:
+file_browser_callback : 'elFinderBrowser'</p>
+
+<div class="highlight highlight-yml"><pre><span class="l-Scalar-Plain">stfalcon_tinymce</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">theme</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">simple</span><span class="p-Indicator">:</span>
+            <span class="l-Scalar-Plain">file_browser_callback</span> <span class="p-Indicator">:</span> <span class="s">'elFinderBrowser'</span>
+</pre></div>
+
+<p>after (  {{ tinymce_init() }} ) function call
+place ElfinderBundle's function: {{ elfinder_tinymce_init('instance_name', {'width':'900', 'height': '450', 'title':'ElFinder 2.0'}) }}
+as shown below</p>
+
+<div class="highlight highlight-jinja"><pre><span class="cp">{{</span> <span class="nv">tinymce_init</span><span class="o">()</span> <span class="cp">}}</span><span class="x"></span>
+<span class="cp">{{</span> <span class="nv">elfinder_tinymce_init</span><span class="o">(</span><span class="s1">'instance_name'</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+
+<p>instance_name is instance of elfinder's configuration</p>
+
+<h3>
+<a name="integrating-with-tinymce-4x" class="anchor" href="#integrating-with-tinymce-4x"><span class="octicon octicon-link"></span></a>Integrating with TinyMCE 4.x</h3>
+
+<p>Update the editor property in your app/config.yml</p>
+
+<div class="highlight highlight-yml"><pre> <span class="l-Scalar-Plain">fm_elfinder</span><span class="p-Indicator">:</span>
+     <span class="l-Scalar-Plain">editor</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">tinymce4</span>
+</pre></div>
+
+<p>Under tinymce configuration node, theme configuration, add:
+ file_browser_callback : elFinderBrowser</p>
+
+<div class="highlight highlight-yml"><pre><span class="l-Scalar-Plain">stfalcon_tinymce</span><span class="p-Indicator">:</span>
+     <span class="l-Scalar-Plain">theme</span><span class="p-Indicator">:</span>
+         <span class="l-Scalar-Plain">simple</span><span class="p-Indicator">:</span>
+             <span class="l-Scalar-Plain">file_browser_callback</span> <span class="p-Indicator">:</span> <span class="l-Scalar-Plain">elFinderBrowser</span>
+</pre></div>
+
+<p>before (  {{ tinymce_init() }} ) function call (order is important)
+place ElfinderBundle's function: {{ elfinder_tinymce_init4('instance_name', {'width':'900', 'height': '450', 'title':'ElFinder 2.0'} ) }}
+as shown below</p>
+
+<div class="highlight highlight-jinja"><pre><span class="x">     </span><span class="cp">{{</span> <span class="nv">elfinder_tinymce_init4</span><span class="o">(</span><span class="s1">'instance_name'</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+<span class="x">     </span><span class="cp">{{</span> <span class="nv">tinymce_init</span><span class="o">()</span> <span class="cp">}}</span><span class="x"></span>
+</pre></div>
+
+<p>instance_name is instance of elfinder's configuration</p>
+
+<p>That's all, Elfinder is configured to work with TinyMCE editor.</p>
+
+<h1>
+<a name="custom-configuration-provider" class="anchor" href="#custom-configuration-provider"><span class="octicon octicon-link"></span></a>Custom configuration provider</h1>
+
+<p>ElFinder bundle allows to override his configuration provider service:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="l-Scalar-Plain">fm_elfinder</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">configuration_provider</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">elfinder.configurator</span>
+</pre></div>
+
+<p>where 'elfinder.configurator' is default ElFinder's bundle service to read configuration from DIC</p>
+
+<p>To override service, simply define your own service:</p>
+
+<div class="highlight highlight-yaml"><pre><span class="l-Scalar-Plain">services</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">my_elfinder_configurator</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">class</span><span class="p-Indicator">:</span>        <span class="l-Scalar-Plain">Acme\DemoBundle\MyElfinderConfigurator</span>
+        <span class="l-Scalar-Plain">arguments</span><span class="p-Indicator">:</span>    <span class="p-Indicator">[</span><span class="s">"%my_arguments%"</span><span class="p-Indicator">]</span>
+</pre></div>
+
+<p>Configuration class must implement interface ElFinderConfigurationProviderInterface</p>
+
+<p>method getConfiguration($instance) should return array of parameters compatible with ElFinder bundle configuration</p>
+
+<p>Manual integration guide can be found <a href="/INTEGRATION_GUIDE.md">here</a></p>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>Todo</h2>
+
+<p>More tests, gridfs support, complex user intergration(?)</p>
+
+<h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
+
+<h3>
+<a name="21" class="anchor" href="#21"><span class="octicon octicon-link"></span></a>2.1</h3>
+
+<ul>
+<li>New Elfinder form type, provides basic  field with Elfinder callback</li>
+</ul><h3>
+<a name="20" class="anchor" href="#20"><span class="octicon octicon-link"></span></a>2.0</h3>
+
+<ul>
+<li>Multiple instances of elfinder configuration (allows multiple editors in one project, with different elfinder configurations)</li>
+</ul><h3>
+<a name="14" class="anchor" href="#14"><span class="octicon octicon-link"></span></a>1.4</h3>
+
+<ul>
+<li>Made compressing assets optional. When compressing is active, it now uses
+uglify.js instead of YUI compressor.</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/helios-ag">helios-ag</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-18798701-8");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
